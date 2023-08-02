@@ -45,10 +45,8 @@ public SinglyLinkedList(){
     @Override
     public String toString(){
         StringBuilder sb=new StringBuilder();
-
         //ADD HEAD
         sb.append("Head -> ");
-
         //Loop through the list and print each data
         if(head  != null) {
             Node<T> temp = head;
@@ -58,10 +56,8 @@ public SinglyLinkedList(){
                 temp = temp.getNext();
             } while (temp != null);  //&& temp.hasNext());
         }
-
         //ADD NULL
         sb.append("NULL");
-
         return sb.toString();
     }
 
@@ -77,21 +73,40 @@ public SinglyLinkedList(){
 
     @Override
     public boolean contains(Object data) {
-        return false;
+        return (this.find(data)!= -1);
     }
 
     @Override
     public int find(Object data) {
-        return 0;
+        if(this.isEmpty())return -1;
+        int found=-1;
+
+        Node <T>temp =head;
+        do {
+            found++;
+            if(temp.getData().equals((data))) return found;
+            temp=temp.getNext();
+        }while(temp != null);
+
+
+        return -1;
     }
 
     @Override
     public int size() {
-        return 0;
+        if(this.isEmpty()) return 0;
+        int count=0;
+        Node <T>temp =head;
+        do {
+        count++;
+        temp=temp.getNext();
+        }while(temp != null);
+        return count;
     }
 
     @Override
     public SinglyLinkedList copy() {
+
         return null;
     }
 
