@@ -28,20 +28,9 @@ public SinglyLinkedList(){
     }
     }
 
-    public void add2(Object data,int delete) {
-        Node newnode = new Node(data);
-        if(this.head == null){
-            this.head = newnode;
-        }
-        else{
-            Node<T> temp = head;
-            while(temp.hasNext()){ // walk to end
-                temp = temp.getNext();
-            }
-            temp.setNext(newnode);
-        }
 
-    }
+
+
     @Override
     public String toString(){
         StringBuilder sb=new StringBuilder();
@@ -63,12 +52,32 @@ public SinglyLinkedList(){
 
     @Override
     public void remove(int index) throws IndexOutOfBoundsException {
+        if(index>0) {
+            head = (Node<T>) get(index - 1);
+            head.setNext((Node) get(index + 1));
+        }
+        if (index ==0){
+
+            head= (Node<T>) get(index + 1);
+        }
+
 
     }
 
     @Override
     public Object get(int index) throws IndexOutOfBoundsException {
-        return null;
+        if(this.head==null)return null;
+        if(index == 0 ){
+            return this.head;
+        }
+        else{
+            Node<T> p =head;
+            for (int i=0;i<index;i++){
+                p=p.getNext();
+            }
+            return p;
+        }
+
     }
 
     @Override
@@ -106,8 +115,17 @@ public SinglyLinkedList(){
 
     @Override
     public SinglyLinkedList copy() {
-
-        return null;
+        SinglyLinkedList result = new SinglyLinkedList();
+        if(this.isEmpty()){
+            return result;
+        }
+        Node temp =head;
+        while(temp.hasNext()){
+            result.add(temp.getData());
+            temp = temp.getNext();
+        }
+result.add(temp.getData());
+        return result;
     }
 
     @Override
